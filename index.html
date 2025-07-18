@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RecipeApp - Tu cocina saludable</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e'
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.3s ease-out',
+                        'fade-out': 'fadeOut 0.2s ease-in',
+                        'slide-up': 'slideUp 0.3s ease-out',
+                        'bounce-gentle': 'bounceGentle 2s infinite'
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(10px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        fadeOut: {
+                            '0%': { opacity: '1', transform: 'translateY(0)' },
+                            '100%': { opacity: '0', transform: 'translateY(-10px)' }
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        bounceGentle: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="src/css/animations.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <div id="app">
+        <!-- Navigation -->
+        <nav id="navbar" class="bg-white dark:bg-gray-800 shadow-lg fixed w-full top-0 z-50 transition-colors duration-300 glass-morphism">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-16">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <h1 class="text-2xl font-bold gradient-text">
+                                <i class="fas fa-utensils mr-2"></i>RecipeApp
+                            </h1>
+                        </div>
+                    </div>
+                    
+                    <!-- Desktop Navigation -->
+                    <div class="hidden md:flex items-center space-x-4">
+                        <a href="#" data-route="home" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 hover-lift">
+                            <i class="fas fa-home mr-1"></i>Inicio
+                        </a>
+                        <a href="#" data-route="recipes" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 hover-lift">
+                            <i class="fas fa-book mr-1"></i>Recetas
+                        </a>
+                        <a href="#" data-route="profile" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 hover-lift">
+                            <i class="fas fa-user mr-1"></i>Perfil
+                        </a>
+                        <div id="admin-nav" class="hidden">
+                            <a href="#" data-route="admin" class="nav-link text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 hover-lift">
+                                <i class="fas fa-cog mr-1"></i>Admin
+                            </a>
+                        </div>
+                        <button id="theme-toggle" class="p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
+                            <i class="fas fa-moon dark:hidden"></i>
+                            <i class="fas fa-sun hidden dark:inline"></i>
+                        </button>
+                        <button id="logout-btn" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors hover-lift">
+                            <i class="fas fa-sign-out-alt mr-1"></i>Salir
+                        </button>
+                    </div>
+
+                    <!-- Mobile menu button -->
+                    <div class="md:hidden flex items-center">
+                        <button id="theme-toggle-mobile" class="p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors mr-2">
+                            <i class="fas fa-moon dark:hidden"></i>
+                            <i class="fas fa-sun hidden dark:inline"></i>
+                        </button>
+                        <button id="mobile-menu-btn" class="text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 focus:outline-none">
+                            <i class="fas fa-bars text-xl"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Navigation Menu -->
+            <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
+                <div class="px-2 pt-2 pb-3 space-y-1">
+                    <a href="#" data-route="home" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                        <i class="fas fa-home mr-2"></i>Inicio
+                    </a>
+                    <a href="#" data-route="recipes" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                        <i class="fas fa-book mr-2"></i>Recetas
+                    </a>
+                    <a href="#" data-route="profile" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                        <i class="fas fa-user mr-2"></i>Perfil
+                    </a>
+                    <div id="admin-nav-mobile" class="hidden">
+                        <a href="#" data-route="admin" class="nav-link-mobile block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                            <i class="fas fa-cog mr-2"></i>Admin
+                        </a>
+                    </div>
+                    <button id="logout-btn-mobile" class="w-full text-left block px-3 py-2 rounded-md text-base font-medium text-red-600 hover:text-red-500 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                        <i class="fas fa-sign-out-alt mr-2"></i>Salir
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main id="main-content" class="pt-16 min-h-screen">
+            <!-- Login Screen -->
+            <div id="login-screen" class="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 to-blue-100 dark:from-gray-900 dark:to-gray-800">
+    <div class="max-w-md w-full space-y-8 p-8">
+        <!-- Welcome Section -->
+        <div id="welcome-section" class="text-center">
+            <div class="mb-8">
+                <h1 class="text-4xl font-extrabold text-gray-900 dark:text-white mb-2 gradient-text">
+                    <i class="fas fa-utensils text-primary-600 dark:text-primary-400 mr-3 animate-bounce-gentle"></i>
+                    RecipeApp
+                </h1>
+                <p class="text-lg text-gray-600 dark:text-gray-400 mb-6">
+                    Tu cocina saludable te espera
+                </p>
+                <div class="space-y-4">
+                    <button id="show-login" class="w-full bg-gradient-to-r from-primary-600 to-blue-600 hover:from-primary-700 hover:to-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 text-lg hover-lift">
+                        <i class="fas fa-sign-in-alt mr-2"></i>
+                        Iniciar Sesión
+                    </button>
+                    <button id="show-register" class="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 text-lg hover-lift">
+                        <i class="fas fa-user-plus mr-2"></i>
+                        Crear Cuenta
+                    </button>
+                    <button id="demo-login" class="w-full bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 text-white font-medium py-2 px-4 rounded-lg transition-all duration-300 hover-lift">
+                        <i class="fas fa-eye mr-2"></i>
+                        Ver Demo
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Features Preview -->
+            <div class="grid grid-cols-1 gap-4 text-sm">
+                <div class="flex items-center text-gray-600 dark:text-gray-400 animate-fade-in">
+                    <i class="fas fa-search text-primary-500 mr-3"></i>
+                    Miles de recetas de todo el mundo
+                </div>
+                <div class="flex items-center text-gray-600 dark:text-gray-400 animate-fade-in" style="animation-delay: 0.1s">
+                    <i class="fas fa-heart text-red-500 mr-3"></i>
+                    Recomendaciones personalizadas
+                </div>
+                <div class="flex items-center text-gray-600 dark:text-gray-400 animate-fade-in" style="animation-delay: 0.2s">
+                    <i class="fas fa-mobile-alt text-green-500 mr-3"></i>
+                    Acceso desde cualquier dispositivo
+                </div>
+                <div class="flex items-center text-gray-600 dark:text-gray-400 animate-fade-in" style="animation-delay: 0.3s">
+                    <i class="fas fa-robot text-blue-500 mr-3"></i>
+                    Asistente culinario inteligente
+                </div>
+            </div>
+        </div>
+
+        <!-- Login Form -->
+        <form id="login-form" class="hidden mt-8 space-y-6 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl glass-morphism">
+            <div class="text-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Iniciar Sesión</h2>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                    Accede a tu cuenta para continuar
+                </p>
+            </div>
+            
+            <div>
+                <label for="login-email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
+                <input id="login-email" name="email" type="email" required 
+                       class="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 sm:text-sm transition-all duration-200"
+                       placeholder="tu@email.com">
+            </div>
+            <div>
+                <label for="login-password" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Contraseña</label>
+                <div class="relative">
+                    <input id="login-password" name="password" type="password" required 
+                           class="mt-1 appearance-none relative block w-full px-3 py-2 pr-10 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 sm:text-sm transition-all duration-200"
+                           placeholder="••••••••">
+                    <button type="button" id="toggle-login-password" class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                        <i class="fas fa-eye text-gray-400 hover:text-gray-600 transition-colors"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                    <label for="remember-me" class="ml-2 block text-sm text-gray-900 dark:text-gray-300">
+                        Recordarme
+                    </label>
+                </div>
+                <div class="text-sm">
+                    <a href="#" id="forgot-password" class="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 transition-colors">
+                        ¿Olvidaste tu contraseña?
+                    </a>
+                </div>
+            </div>
+            
+            <div>
+                <button type="submit" 
+                        class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gradient-to-r from-primary-600 to-blue-600 hover:from-primary-700 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-all duration-300 hover-lift">
+                    <i class="fas fa-sign-in-alt mr-2"></i>
+                    Iniciar Sesión
+                </button>
+            </div>
+            
+            <div class="text-center">
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                    ¿No tienes cuenta? 
+                    <button type="button" id="switch-to-register" class="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 transition-colors">
+                        Regístrate aquí
+                    </button>
+                </p>
+                <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-600">
+                    <p class="text-xs text-gray-500 dark:text-gray-400">
+                        <strong>Demo:</strong> admin@test.com / admin123 (Admin)<br>
+                        user@test.com / user123 (Usuario)
+                    </p>
+                </div>
+            </div>
+        </form>
+
+        <!-- Register Form -->
+        <form id="register-form" class="hidden mt-8 space-y-6 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl glass-morphism">
+            <div class="text-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Crear Cuenta</h2>
+                <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                    Únete a nuestra comunidad culinaria
+                </p>
+            </div>
+            
+            <div>
+                <label for="register-name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nombre completo</label>
+                <input id="register-name" name="name" type="text" required 
+                       class="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 sm:text-sm transition-all duration-200"
+                       placeholder="Tu nombre completo">
+            </div>
+            
+            <div>
+                <label for="register-email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
+                <input id="register-email" name="email" type="email" required 
+                       class="mt-1 appearance-none relative block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 sm:text-sm transition-all duration-200"
+                       placeholder="tu@email.com">
+            </div>
+            
+            <div>
+                <label for="register-password" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Contraseña</label>
+                <div class="relative">
+                    <input id="register-password" name="password" type="password" required 
+                           class="mt-1 appearance-none relative block w-full px-3 py-2 pr-10 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 sm:text-sm transition-all duration-200"
+                           placeholder="••••••••">
+                    <button type="button" id="toggle-register-password" class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                        <i class="fas fa-eye text-gray-400 hover:text-gray-600 transition-colors"></i>
+                    </button>
+                </div>
+                <div class="mt-1">
+                    <div id="password-strength" class="text-xs text-gray-500 dark:text-gray-400">
+                        La contraseña debe tener al menos 6 caracteres
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <label for="register-confirm-password" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Confirmar contraseña</label>
+                <div class="relative">
+                    <input id="register-confirm-password" name="confirmPassword" type="password" required 
+                           class="mt-1 appearance-none relative block w-full px-3 py-2 pr-10 border border-gray-300 dark:border-gray-600 placeholder-gray-500 dark:placeholder-gray-400 text-gray-900 dark:text-white rounded-md focus:outline-none focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 sm:text-sm transition-all duration-200"
+                           placeholder="••••••••">
+                    <button type="button" id="toggle-confirm-password" class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                        <i class="fas fa-eye text-gray-400 hover:text-gray-600 transition-colors"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div>
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Tipo de dieta preferida</label>
+                <select id="register-diet" name="dietType" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:text-white transition-all duration-200">
+                    <option value="omnivore">Omnívora</option>
+                    <option value="vegetarian">Vegetariana</option>
+                    <option value="vegan">Vegana</option>
+                    <option value="keto">Keto</option>
+                    <option value="paleo">Paleo</option>
+                </select>
+            </div>
+            
+            <div class="flex items-center">
+                <input id="accept-terms" name="acceptTerms" type="checkbox" required class="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded">
+                <label for="accept-terms" class="ml-2 block text-sm text-gray-900 dark:text-gray-300">
+                    Acepto los <a href="#" class="text-primary-600 hover:text-primary-500 transition-colors">términos y condiciones</a>
+                </label>
+            </div>
+            
+            <div>
+                <button type="submit" 
+                        class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all duration-300 hover-lift">
+                    <i class="fas fa-user-plus mr-2"></i>
+                    Crear Cuenta
+                </button>
+            </div>
+            
+            <div class="text-center">
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                    ¿Ya tienes cuenta? 
+                    <button type="button" id="switch-to-login" class="font-medium text-primary-600 hover:text-primary-500 dark:text-primary-400 transition-colors">
+                        Inicia sesión aquí
+                    </button>
+                </p>
+            </div>
+        </form>
+
+        <!-- Back to Welcome -->
+        <div class="text-center">
+            <button id="back-to-welcome" class="hidden text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 transition-colors">
+                <i class="fas fa-arrow-left mr-1"></i>
+                Volver al inicio
+            </button>
+        </div>
+    </div>
+</div>
+
+            <!-- App Content -->
+            <div id="app-content" class="hidden">
+                <!-- Content will be loaded here -->
+            </div>
+        </main>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,245 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "email": "admin@test.com",
+      "password": "admin123",
+      "name": "Administrador",
+      "role": "admin",
+      "preferences": {
+        "dietType": "paleo",
+        "allergies": [],
+        "favoriteCategories": []
+      },
+      "lastLogin": "2025-07-18T00:19:05.383Z",
+      "createdAt": "2024-01-01T00:00:00Z",
+      "isActive": true
+    },
+    {
+      "id": "2",
+      "email": "user@test.com",
+      "password": "user123",
+      "name": "Usuario Demo",
+      "role": "user",
+      "preferences": {
+        "dietType": "vegetarian",
+        "allergies": [
+          "nuts"
+        ],
+        "favoriteCategories": [
+          "vegetarian",
+          "vegan"
+        ]
+      },
+      "lastLogin": "2025-07-18T00:41:26.424Z",
+      "createdAt": "2024-01-02T00:00:00Z",
+      "isActive": true
+    },
+    {
+      "id": "3",
+      "email": "maria@test.com",
+      "password": "maria123",
+      "name": "María García",
+      "role": "user",
+      "preferences": {
+        "dietType": "keto",
+        "allergies": [
+          "gluten"
+        ],
+        "favoriteCategories": [
+          "keto",
+          "low-carb"
+        ]
+      },
+      "lastLogin": "2024-01-13T09:20:00Z",
+      "createdAt": "2024-01-03T00:00:00Z",
+      "isActive": true
+    },
+    {
+      "id": 1752796706536,
+      "email": "ching@gmail.com",
+      "password": "ching1234.",
+      "name": "ching",
+      "role": "user",
+      "preferences": {
+        "dietType": "vegan",
+        "allergies": [],
+        "favoriteCategories": []
+      },
+      "lastLogin": "2025-07-17T23:58:26.536Z",
+      "createdAt": "2025-07-17T23:58:26.536Z",
+      "isActive": true
+    }
+  ],
+  "recipes": [
+    {
+      "id": "1",
+      "title": "Ensalada Mediterránea",
+      "description": "Una deliciosa ensalada fresca con ingredientes mediterráneos",
+      "category": "mediterranean",
+      "dietType": [
+        "vegetarian",
+        "vegan"
+      ],
+      "ingredients": [
+        "Tomates cherry",
+        "Pepino",
+        "Aceitunas negras",
+        "Queso feta",
+        "Aceite de oliva",
+        "Orégano"
+      ],
+      "instructions": [
+        "Cortar los tomates por la mitad",
+        "Cortar el pepino en rodajas",
+        "Mezclar todos los ingredientes",
+        "Aliñar con aceite de oliva y orégano"
+      ],
+      "prepTime": 15,
+      "difficulty": "easy",
+      "image": "/placeholder.svg?height=300&width=400",
+      "nutrition": {
+        "calories": 250,
+        "protein": 8,
+        "carbs": 12,
+        "fat": 18
+      }
+    },
+    {
+      "id": "2",
+      "title": "Salmón a la Plancha con Verduras",
+      "description": "Salmón jugoso acompañado de verduras asadas",
+      "category": "healthy",
+      "dietType": [
+        "keto",
+        "paleo"
+      ],
+      "ingredients": [
+        "Filete de salmón",
+        "Brócoli",
+        "Calabacín",
+        "Aceite de oliva",
+        "Limón",
+        "Ajo"
+      ],
+      "instructions": [
+        "Sazonar el salmón con sal y pimienta",
+        "Calentar la plancha",
+        "Cocinar el salmón 4 minutos por lado",
+        "Asar las verduras con aceite de oliva"
+      ],
+      "prepTime": 25,
+      "difficulty": "medium",
+      "image": "/placeholder.svg?height=300&width=400",
+      "nutrition": {
+        "calories": 380,
+        "protein": 35,
+        "carbs": 8,
+        "fat": 22
+      }
+    },
+    {
+      "id": "3",
+      "title": "Bowl de Quinoa Vegano",
+      "description": "Bowl nutritivo con quinoa, verduras y tahini",
+      "category": "vegan",
+      "dietType": [
+        "vegan",
+        "vegetarian"
+      ],
+      "ingredients": [
+        "Quinoa",
+        "Garbanzos",
+        "Espinacas",
+        "Zanahoria",
+        "Tahini",
+        "Limón"
+      ],
+      "instructions": [
+        "Cocinar la quinoa según instrucciones",
+        "Saltear las verduras",
+        "Preparar salsa de tahini",
+        "Montar el bowl con todos los ingredientes"
+      ],
+      "prepTime": 30,
+      "difficulty": "easy",
+      "image": "/placeholder.svg?height=300&width=400",
+      "nutrition": {
+        "calories": 420,
+        "protein": 18,
+        "carbs": 45,
+        "fat": 16
+      }
+    }
+  ],
+  "motivationalQuotes": [
+    {
+      "id": "1",
+      "text": "La comida es medicina. Elige sabiamente.",
+      "author": "Hipócrates"
+    },
+    {
+      "id": "2",
+      "text": "Cocinar es un acto de amor hacia ti mismo y hacia otros.",
+      "author": "Julia Child"
+    },
+    {
+      "id": "3",
+      "text": "Una alimentación saludable es la base de una vida plena.",
+      "author": "Anónimo"
+    },
+    {
+      "id": "4",
+      "text": "No cuentes calorías, haz que las calorías cuenten.",
+      "author": "Anónimo"
+    },
+    {
+      "id": "5",
+      "text": "La mejor inversión que puedes hacer es en tu salud.",
+      "author": "Warren Buffett"
+    }
+  ],
+  "dietAdvice": [
+    {
+      "id": "1",
+      "dietType": "vegetarian",
+      "advice": "Asegúrate de incluir proteínas completas como quinoa, legumbres y frutos secos en tu dieta diaria.",
+      "tips": [
+        "Combina cereales con legumbres",
+        "Incluye vitamina B12",
+        "Consume hierro con vitamina C"
+      ]
+    },
+    {
+      "id": "2",
+      "dietType": "vegan",
+      "advice": "Planifica tus comidas para obtener todos los nutrientes esenciales, especialmente B12, hierro y omega-3.",
+      "tips": [
+        "Suplementa vitamina B12",
+        "Incluye semillas de chía y lino",
+        "Consume variedad de colores en vegetales"
+      ]
+    },
+    {
+      "id": "3",
+      "dietType": "keto",
+      "advice": "Mantén un equilibrio adecuado de grasas saludables y controla tu ingesta de carbohidratos.",
+      "tips": [
+        "70% grasas, 25% proteínas, 5% carbohidratos",
+        "Hidrátate bien",
+        "Incluye electrolitos"
+      ]
+    }
+  ],
+  "appStats": {
+    "totalUsers": 3,
+    "activeUsers": 3,
+    "totalRecipes": 3,
+    "popularCategories": [
+      "mediterranean",
+      "healthy",
+      "vegan"
+    ],
+    "lastUpdated": "2024-01-15T10:30:00Z"
+  }
+}
